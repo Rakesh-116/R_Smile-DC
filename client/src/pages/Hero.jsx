@@ -3,6 +3,9 @@ import WhyChooseUsSection from "../components/WhyChooseUsSection";
 import OfficePreviewSection from "../components/OurOfficeSection";
 import InsurancePartners from "../components/InsurancePartners";
 import ServicesSection from "../components/ServicesSection";
+import TestimonialsSection from "../components/TestimonialsSection";
+import LocationHoursSection from "../components/LocationHoursSection";
+import Footer from "../components/Footer";
 
 const Hero = () => {
   return (
@@ -56,6 +59,8 @@ const Hero = () => {
         <ServicesSection />
         <OfficePreviewSection />
         <InsurancePartners />
+        <TestimonialsSection />
+        <LocationHoursSection />
       </div>
     </div>
   );
