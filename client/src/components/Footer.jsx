@@ -1,16 +1,21 @@
-// components/Footer.jsx
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 py-16 px-6 sm:px-12 border-t">
+    <footer className="bg-blue-950 py-16 px-6 sm:px-12 text-white">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
-        {/* About */}
+        {/* About + Logo */}
         <div>
-          <h4 className="text-sm uppercase text-gray-500 mb-2">
+          <img
+            src="/logo.png" // Replace with actual path to your logo
+            alt="R-Smile Logo"
+            className="w-32 mb-4"
+          />
+          <h4 className="text-sm uppercase text-gray-400 mb-2">
             About R-Smile Dental
           </h4>
-          <p className="text-gray-700 text-sm">
+          <p className="text-gray-300 text-sm">
             R-Smile Dental Care offers compassionate and modern dental
             treatments with trusted experience in Sewell, NJ.
           </p>
@@ -18,29 +23,40 @@ const Footer = () => {
 
         {/* Links */}
         <div>
-          <h4 className="text-sm uppercase text-gray-500 mb-2">Quick Links</h4>
-          <ul className="space-y-1 text-sm text-blue-900 underline">
-            <li>Home</li>
-            <li>Pay Online</li>
-            <li>Forms</li>
-            <li>Careers</li>
-            <li>Dental Emergencies</li>
-            <li>FAQ</li>
+          <h4 className="text-sm uppercase text-gray-400 mb-2">Quick Links</h4>
+          <ul className="space-y-1 text-sm text-white">
+            {[
+              { label: "Home", to: "/" },
+              { label: "Pay Online", to: "/pay-online" },
+              { label: "Forms", to: "/forms" },
+              { label: "Careers", to: "/careers" },
+              { label: "Dental Emergencies", to: "/emergency" },
+              { label: "FAQ", to: "/faq" },
+            ].map((item) => (
+              <li key={item.label}>
+                <Link
+                  to={item.to}
+                  className="hover:underline hover:text-gray-300 transition"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
         {/* Contact */}
         <div>
-          <h4 className="text-sm uppercase text-gray-500 mb-2">Contact Us</h4>
-          <p className="text-sm text-blue-900 font-semibold">
+          <h4 className="text-sm uppercase text-gray-400 mb-2">Contact Us</h4>
+          <p className="text-sm font-semibold text-white">
             R-Smile Dental Care
           </p>
-          <p className="text-sm">
+          <p className="text-sm text-gray-300">
             100B Kings Way West, Suite 100B <br /> Sewell, NJ 08080
           </p>
-          <p className="text-sm mt-2">Call: 856-210-9508</p>
-          <p className="text-sm">Fax: 856-537-3803</p>
-          <p className="text-sm">Email: info@rsmiledental.com</p>
+          <p className="text-sm mt-2 text-gray-300">Call: 856-210-9508</p>
+          <p className="text-sm text-gray-300">Fax: 856-537-3803</p>
+          <p className="text-sm text-gray-300">Email: info@rsmiledental.com</p>
         </div>
 
         {/* Map */}
@@ -58,13 +74,23 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom Text */}
-      <div className="text-center text-xs text-gray-400 mt-10 space-x-4">
-        <span>© 2025 Tebra Inc.</span>
-        <span>Privacy Policy</span>
-        <span>Terms & Conditions</span>
-        <span>Accessibility Notice</span>
-        <span>Contact Us</span>
+      {/* Bottom Links */}
+      <div className="text-center text-xs text-gray-400 mt-10 flex flex-wrap justify-center gap-4">
+        <span>© 2025 R-Smile Dental Care. All Rights Reserved.</span>
+        {[
+          { label: "Privacy Policy", to: "/privacy" },
+          { label: "Terms & Conditions", to: "/terms" },
+          { label: "Accessibility Notice", to: "/accessibility" },
+          { label: "Contact Us", to: "/contact" },
+        ].map((item) => (
+          <Link
+            key={item.label}
+            to={item.to}
+            className="hover:underline hover:text-gray-200 transition"
+          >
+            {item.label}
+          </Link>
+        ))}
       </div>
     </footer>
   );

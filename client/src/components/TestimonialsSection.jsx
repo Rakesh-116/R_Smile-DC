@@ -22,7 +22,7 @@ const TestimonialsSection = () => {
   ];
 
   return (
-    <section className="py-20 px-6 sm:px-12 bg-white">
+    <section className="py-20 px-6 sm:px-12 ">
       <div className="max-w-6xl mx-auto">
         <SectionHeading
           label="Our Patients Say It Best"
@@ -33,7 +33,7 @@ const TestimonialsSection = () => {
           {testimonials.map((t, idx) => (
             <div
               key={idx}
-              className="bg-blue-50 rounded-2xl p-6 shadow-md hover:shadow-lg transition"
+              className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition"
             >
               <p className="text-gray-700 text-base italic">“{t.quote}”</p>
               <p className="text-blue-900 font-semibold mt-4">— {t.name}</p>

@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import SectionHeading from "./SectionHeading ";
+import Button from "./Button";
 
 const OfficePreviewSection = () => {
   const navigate = useNavigate();
@@ -41,31 +42,26 @@ const OfficePreviewSection = () => {
   };
 
   return (
-    <section className="py-20 px-6 sm:px-12 bg-blue-50 rounded-4xl">
-      <div className="max-w-7xl mx-auto lg:px-6">
-        {/* Heading */}
+    <section className="py-20 px-6 sm:px-12 bg-white">
+      <div className="max-w-6xl mx-auto">
         <SectionHeading
           label="Welcome to Our Office"
-          title="A warm, calming space where comfort meets compassionate care."
+          title="A relaxing space designed to make you feel at home."
         />
+        {/* Heading */}
 
-        {/* Description */}
+        {/* Shortened Description */}
         <div className="text-gray-700 text-sm sm:text-base leading-relaxed max-w-4xl mb-12">
           <p className="mb-4 font-semibold text-blue-900 text-lg">
-            "We specialize in treating fearful and anxious patients"
+            "We treat fearful and anxious patients with care."
           </p>
           <p>
-            Compassion and understanding are the guiding principles by which Dr.
-            Rashmi Srivastava, DDS and her staff treat every patient. We care
-            about our patients and do our best to create an environment that is
-            both pleasant and comfortable. Dentistry has come a long way, and in
-            the hands of a caring professional like Dr. Srivastava, patients can
-            relax and receive all necessary treatment with ease.
+            Dr. Rashmi Srivastava, DDS and her team create a friendly, calm
+            environment so you feel relaxed during your visit. Modern dentistry
+            and gentle care come together for a stress-free experience.
           </p>
           <p className="mt-3">
-            You’ll hear and see laughter and smiles from both staff and
-            patients. Every member of our team is a dedicated professional who
-            takes pride in their skill and knowledge.
+            Expect smiles, comfort, and a team that truly loves what they do.
           </p>
         </div>
 
@@ -86,12 +82,7 @@ const OfficePreviewSection = () => {
 
         {/* CTA Button */}
         <div className="mt-10 text-center">
-          <button
-            onClick={() => navigate("/our-office")}
-            className="border-2 border-blue-950 rounded-full px-5 py-2 hover:bg-blue-950 hover:text-white text-blue-950 font-medium transition duration-300"
-          >
-            See Full Tour
-          </button>
+          <Button onClick={() => navigate("/our-office")}>See Full Tour</Button>
         </div>
       </div>
     </section>

@@ -34,7 +34,7 @@ const insuranceProviders = [
 
 const InsurancePartners = () => {
   return (
-    <section className="py-20 px-6 sm:px-10 bg-white">
+    <section className="py-20 px-6 sm:px-10 bg-blue-50">
       <div className="max-w-6xl mx-auto mb-12">
         <SectionHeading
           label="Our Trusted Insurance Partners"

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FiMenu, FiX, FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import Button from "./Button";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -90,12 +91,14 @@ const Navbar = () => {
         </nav>
 
         {/* CTA */}
-        <button
+        {/* <button
           href="#"
-          className="border-2 border-blue-950 rounded-full px-4 py-3 hover:bg-blue-950 cursor-pointer hover:text-white hover:font-medium transition duration-300"
+          className="border-2 border-blue-600 rounded-full px-4 py-3 hover:bg-blue-600 cursor-pointer text-blue-600 hover:text-white hover:font-medium transition duration-300"
         >
           Request Appointment
-        </button>
+        </button> */}
+
+        <Button>Request Appointment</Button>
 
         {/* Hamburger */}
         <button
@@ -158,12 +161,10 @@ const Navbar = () => {
             ))}
 
             {/* CTA for mobile */}
-            <a
-              href="#"
-              className="mt-3 bg-blue-600 text-white text-center py-2 rounded-full hover:bg-blue-700 transition"
-            >
-              Request Appointment
-            </a>
+            {/* <button className="mt-3 bg-blue-600 text-white text-center py-2 rounded-full hover:bg-blue-700 transition">
+                Request Appointment
+              </button> */}
+            <Button className="mt-3 w-full">Request Appointment</Button>
           </nav>
         </div>
       )}

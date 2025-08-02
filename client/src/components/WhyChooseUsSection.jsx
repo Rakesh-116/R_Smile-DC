@@ -8,7 +8,7 @@ const WhyChooseUsSection = () => {
       title: "Advanced Safety First",
       number: "01.",
       description:
-        "We care deeply about your safety. Every operatory includes a medical-grade HEPA filter, operatory doors, openable windows, and a high-tech aerosol-reducing unit to ensure top-tier air quality and protection.",
+        "Every operatory features HEPA filters, doors, windows, and aerosol control for clean, safe air during treatment.",
     },
     {
       title: "Compassion for Every Patient",
@@ -22,9 +22,8 @@ const WhyChooseUsSection = () => {
           >
             friendly team
           </Link>{" "}
-          specializes in treating fearful and anxious patients. From check-in to
-          checkout, we offer a comfortable, judgment-free environment with
-          laughter and genuine care at the center of every visit.
+          specializes in caring for anxious patients. From check-in to checkout,
+          we provide a calm, supportive, and judgment-free experience.
         </>
       ),
     },
@@ -32,12 +31,12 @@ const WhyChooseUsSection = () => {
       title: "Trusted Local Experience",
       number: "03.",
       description:
-        "With over 20 years of expertise, Dr. Rashmi Srivastava and our team deliver patient-first dentistry. We’re proud to continue Dr. Cetel’s legacy of compassionate care that families in Sewell have trusted for decades.",
+        "With 20+ years of care, Dr. Srivastava and our team continue Dr. Cetel’s trusted legacy in Sewell.",
     },
   ];
 
   return (
-    <section className="bg-blue-50 py-20 px-6 sm:px-10 rounded-3xl">
+    <section className="py-10 px-6">
       <div className="max-w-6xl mx-auto">
         <SectionHeading
           label="Why Patients Trust Us"
