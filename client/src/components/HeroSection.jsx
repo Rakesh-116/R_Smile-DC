@@ -54,11 +54,7 @@ const HeroSection = () => {
         {/* Image Section */}
         <div className="flex-1 w-full hidden sm:block">
           <div className="rounded-3xl overflow-hidden shadow-xl">
-            <img
-              src="https://www.oaktreedentalpoway.com/wp-content/uploads/cosmetic-dentist-2401.jpg"
-              alt="Hero"
-              className="w-full"
-            />
+            <img src="./hero-img-1.jpg" alt="Hero" className="w-full" />
           </div>
         </div>
       </div>
