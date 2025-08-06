@@ -2,7 +2,7 @@ import React from "react";
 import { FaUsers } from "react-icons/fa";
 import Button from "../components/Button";
 
-const HeroSection = () => {
+const HeroSection = ({ openDentrixModal }) => {
   return (
     <section className="bg-white py-10 px-6 lg:-mt-10 pt-28 sm:pt-32">
       <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-10 h-[80vh]">
@@ -26,7 +26,10 @@ const HeroSection = () => {
             {/* <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-medium transition-shadow hover:shadow-lg">
                 Book Appointment
               </button> */}
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-medium transition-shadow hover:shadow-lg duration-300">
+            <Button
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-medium transition-shadow hover:shadow-lg duration-300"
+              onClick={openDentrixModal}
+            >
               Book Appointment
             </Button>
 

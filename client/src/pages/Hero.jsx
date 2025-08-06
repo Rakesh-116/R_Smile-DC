@@ -6,17 +6,19 @@ import ServicesSection from "../components/ServicesSection";
 import TestimonialsSection from "../components/TestimonialsSection";
 import LocationHoursSection from "../components/LocationHoursSection";
 import HeroSection from "../components/HeroSection";
+import ContactSection from "../components/ContactSection";
 
-const Hero = () => {
+const Hero = ({ openDentrixModal }) => {
   return (
     <div className="sm:py-10 bg-white">
-      <HeroSection />
+      <HeroSection openDentrixModal={openDentrixModal} />
       <WhyChooseUsSection />
       <ServicesSection />
       <OfficePreviewSection />
       <InsurancePartners />
       <TestimonialsSection />
-      <LocationHoursSection />
+      {/* <LocationHoursSection openDentrixModal={openDentrixModal} /> */}
+      <ContactSection openDentrixModal={openDentrixModal} />
     </div>
   );
 };

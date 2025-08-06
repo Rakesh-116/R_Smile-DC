@@ -3,7 +3,7 @@ import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 import { MdLocationOn, MdAccessTime, MdPhone } from "react-icons/md";
 
-const LocationHoursSection = () => {
+const LocationHoursSection = ({ openDentrixModal }) => {
   const navigate = useNavigate();
 
   return (
@@ -57,7 +57,10 @@ const LocationHoursSection = () => {
             Book your visit or call us for quick assistance.
           </p>
           <div className="flex flex-col sm:flex-row lg:flex-col gap-4">
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-medium transition-shadow hover:shadow-lg">
+            <Button
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-medium transition-shadow hover:shadow-lg"
+              onClick={openDentrixModal}
+            >
               Book Appointment
             </Button>
             <Button onClick={() => (window.location.href = "tel:8562109508")}>

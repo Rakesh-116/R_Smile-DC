@@ -1,26 +1,14 @@
 import React, { useState } from "react";
 import { FiMenu, FiX, FiChevronDown, FiChevronUp } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "./Button";
 
-const Navbar = () => {
+const Navbar = ({ openDentrixModal }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [menuOpen, setMenuOpen] = useState(false);
-  const [mobileDropdowns, setMobileDropdowns] = useState({
-    services: false,
-    staff: false,
-    office: false,
-  });
-
-  const toggleMenu = () => setMenuOpen(!menuOpen);
-
-  const toggleDropdown = (key) => {
-    setMobileDropdowns((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
-  };
-
-  const mainLinks = ["Home", "Specials", "Blog", "Testimonials", "Contact"];
+  const [touchDropdown, setTouchDropdown] = useState(null); // for tablets
 
   const dropdownItems = {
     services: [
@@ -34,137 +22,188 @@ const Navbar = () => {
       "Emergency Care",
       "Teeth Cleaning",
     ],
-    staff: ["Dr. Howard Cetel", "Dr. Rashmi Srivastava", "Staff Members"],
+    staff: ["Dr. Howard Cetel", "Dr. Rashmi Srivastava", "Our Team"],
     office: [
       "Forms and Patient Education",
       "Insurance and Billing",
       "Office Gallery",
     ],
+    more: ["Specials", "Blog", "Testimonials"],
+  };
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const toggleTouchDropdown = (section) => {
+    setTouchDropdown(touchDropdown === section ? null : section);
+  };
+
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    const isHome = location.pathname === "/" || location.pathname === "/home";
+    if (isHome) {
+      document.getElementById("contact")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    } else {
+      navigate("/contact");
+    }
+    setMenuOpen(false);
   };
 
   return (
     <header className="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md shadow-md z-50 mb-10">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4">
-        <Link className="text-2xl font-bold text-blue-700" to="/">
-          {/* R-Smile Dental Care */}
-          <img src="./logo.png" alt="R-Smile Dental Care" className="h-8" />
+        <Link to="/" className="text-2xl font-bold text-blue-700">
+          <img src="./logo.png" alt="R-Smile Logo" className="h-12" />
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-700 relative">
-          {mainLinks.map((link) => (
-            <Link
-              key={link}
-              to={`/${link.toLowerCase()}`}
-              className="hover:text-blue-600 transition"
-            >
-              {link}
-            </Link>
-          ))}
+        <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-700">
+          <Link to="/" className="hover:text-blue-600 transition">
+            Home
+          </Link>
 
-          {/* Desktop Dropdowns */}
+          {/* Loop only through services, staff, office */}
           {["services", "staff", "office"].map((section) => (
-            <div className="relative group" key={section}>
-              <div className="flex items-center gap-1 cursor-pointer hover:text-blue-600">
+            <div
+              key={section}
+              className="relative group"
+              onClick={(e) => {
+                if (window.matchMedia("(hover: none)").matches) {
+                  e.preventDefault();
+                  toggleTouchDropdown(section);
+                }
+              }}
+            >
+              <button className="flex items-center gap-1 hover:text-blue-600">
                 {section === "services"
                   ? "Services"
                   : section === "staff"
                   ? "Our Staff"
                   : "Our Office"}
                 <FiChevronDown className="text-xs mt-0.5" />
-              </div>
+              </button>
 
-              {/* Hover target area expanded */}
-              <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <div
+                className={`absolute top-full left-0 mt-2 w-64 bg-white shadow-lg rounded-md z-50 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 ${
+                  touchDropdown === section ? "visible opacity-100" : ""
+                }`}
+              >
                 {dropdownItems[section].map((item) => (
-                  <a
+                  <Link
                     key={item}
-                    href="#"
-                    className="px-4 py-2 block text-sm text-gray-700 hover:bg-gray-100 transition"
+                    to={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     {item}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
           ))}
+
+          {/* Contact Link */}
+          <a
+            href="#contact"
+            onClick={handleContactClick}
+            className="hover:text-blue-600 transition cursor-pointer"
+          >
+            Contact
+          </a>
+
+          {/* More Dropdown (Last) */}
+          <div
+            className="relative group"
+            onClick={(e) => {
+              if (window.matchMedia("(hover: none)").matches) {
+                e.preventDefault();
+                toggleTouchDropdown("more");
+              }
+            }}
+          >
+            <button className="flex items-center gap-1 hover:text-blue-600">
+              More <FiChevronDown className="text-xs mt-0.5" />
+            </button>
+            <div
+              className={`absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-md z-50 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 ${
+                touchDropdown === "more" ? "visible opacity-100" : ""
+              }`}
+            >
+              {dropdownItems.more.map((item) => (
+                <Link
+                  key={item}
+                  to={`/${item.toLowerCase()}`}
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
+                >
+                  {item}
+                </Link>
+              ))}
+            </div>
+          </div>
         </nav>
 
-        {/* CTA */}
-        {/* <button
-          href="#"
-          className="border-2 border-blue-600 rounded-full px-4 py-3 hover:bg-blue-600 cursor-pointer text-blue-600 hover:text-white hover:font-medium transition duration-300"
-        >
-          Request Appointment
-        </button> */}
-
-        <Button>Request Appointment</Button>
+        <Button onClick={openDentrixModal}>Request Appointment</Button>
 
         {/* Hamburger */}
         <button
-          className="md:hidden text-2xl text-gray-700"
+          className="lg:hidden text-2xl text-gray-700"
           onClick={toggleMenu}
         >
           {menuOpen ? <FiX /> : <FiMenu />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Nav */}
       {menuOpen && (
-        <div className="md:hidden bg-white/95 px-4 pb-4 shadow-inner">
+        <div className="lg:hidden bg-white/95 px-4 pb-4 shadow-inner">
           <nav className="flex flex-col gap-3 text-gray-700 text-sm font-medium">
-            {/* Static Links */}
-            {mainLinks.map((link) => (
-              <a
-                key={link}
-                href="#"
-                className="border-b border-gray-200 py-2 hover:text-blue-600"
-              >
-                {link}
-              </a>
-            ))}
+            <Link to="/" className="hover:text-blue-600">
+              Home
+            </Link>
 
-            {/* Dropdowns on mobile */}
-            {["services", "staff", "office"].map((section) => (
-              <div className="border-b border-gray-200 py-2" key={section}>
+            <a
+              href="#contact"
+              onClick={handleContactClick}
+              className="hover:text-blue-600 transition cursor-pointer"
+            >
+              Contact
+            </a>
+
+            {/* Dropdowns */}
+            {Object.keys(dropdownItems).map((section) => (
+              <div key={section} className="border-b border-gray-200 py-2">
                 <button
-                  onClick={() => toggleDropdown(section)}
+                  onClick={() => toggleTouchDropdown(section)}
                   className="w-full flex justify-between items-center text-left hover:text-blue-600"
                 >
-                  <span>
-                    {section === "services"
-                      ? "Services"
-                      : section === "staff"
-                      ? "Our Staff"
-                      : "Our Office"}
+                  <span className="capitalize">
+                    {section === "more"
+                      ? "More"
+                      : section.replace(/([A-Z])/g, " $1")}
                   </span>
-                  {mobileDropdowns[section] ? (
+                  {touchDropdown === section ? (
                     <FiChevronUp />
                   ) : (
                     <FiChevronDown />
                   )}
                 </button>
-                {mobileDropdowns[section] && (
+                {touchDropdown === section && (
                   <div className="mt-2 ml-2 space-y-2">
                     {dropdownItems[section].map((item) => (
-                      <a
+                      <Link
                         key={item}
-                        href="#"
+                        to={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
                         className="block pl-2 text-gray-600 hover:text-blue-600"
                       >
                         {item}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 )}
               </div>
             ))}
 
-            {/* CTA for mobile */}
-            {/* <button className="mt-3 bg-blue-600 text-white text-center py-2 rounded-full hover:bg-blue-700 transition">
-                Request Appointment
-              </button> */}
-            <Button className="mt-3 w-full">Request Appointment</Button>
+            <Button onClick={openDentrixModal}>Request Appointment</Button>
           </nav>
         </div>
       )}
@@ -173,3 +212,233 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+// import React, { useState } from "react";
+// import { FiMenu, FiX, FiChevronDown, FiChevronUp } from "react-icons/fi";
+// import { Link, useLocation, useNavigate } from "react-router-dom";
+// import Button from "./Button";
+
+// const Navbar = ({ openDentrixModal }) => {
+//   const location = useLocation();
+//   const navigate = useNavigate();
+
+//   const [menuOpen, setMenuOpen] = useState(false);
+//   const [mobileDropdowns, setMobileDropdowns] = useState({
+//     services: false,
+//     staff: false,
+//     office: false,
+//     more: false,
+//   });
+
+//   const toggleMenu = () => setMenuOpen(!menuOpen);
+
+//   const toggleDropdown = (key) =>
+//     setMobileDropdowns((prev) => ({
+//       ...prev,
+//       [key]: !prev[key],
+//     }));
+
+//   const dropdownItems = {
+//     services: [
+//       "Crowns",
+//       "Root Canal",
+//       "Dental Implants",
+//       "Dentures",
+//       "Invisalign",
+//       "Teeth Whitening",
+//       "Oral Surgery",
+//       "Emergency Care",
+//       "Teeth Cleaning",
+//     ],
+//     staff: ["Dr. Howard Cetel", "Dr. Rashmi Srivastava", "Staff Members"],
+//     office: [
+//       "Forms and Patient Education",
+//       "Insurance and Billing",
+//       "Office Gallery",
+//     ],
+//     more: ["Specials", "Blog", "Testimonials"],
+//   };
+
+//   const handleContactClick = (e) => {
+//     e.preventDefault();
+//     const isHome = location.pathname === "/" || location.pathname === "/home";
+//     if (isHome) {
+//       document.getElementById("contact")?.scrollIntoView({
+//         behavior: "smooth",
+//         block: "start",
+//       });
+//     } else {
+//       navigate("/contact");
+//     }
+//     setMenuOpen(false);
+//   };
+
+//   return (
+//     <header className="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md shadow-md z-50 mb-10">
+//       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4">
+//         <Link className="text-2xl font-bold text-blue-700" to="/">
+//           <img src="./logo.png" alt="R-Smile Dental Care" className="h-12" />
+//         </Link>
+
+//         {/* Desktop Nav */}
+//         <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-700 relative">
+//           <Link to="/" className="hover:text-blue-600 transition">
+//             Home
+//           </Link>
+
+//           {/* Services Dropdown */}
+//           <div className="relative group">
+//             <div className="flex items-center gap-1 cursor-pointer hover:text-blue-600">
+//               Services <FiChevronDown className="text-xs mt-0.5" />
+//             </div>
+//             <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20">
+//               {dropdownItems.services.map((item) => (
+//                 <a
+//                   key={item}
+//                   href="#"
+//                   className="px-4 py-2 block text-sm text-gray-700 hover:bg-gray-100 transition"
+//                 >
+//                   {item}
+//                 </a>
+//               ))}
+//             </div>
+//           </div>
+
+//           {/* Staff Dropdown */}
+//           <div className="relative group">
+//             <div className="flex items-center gap-1 cursor-pointer hover:text-blue-600">
+//               Our Staff <FiChevronDown className="text-xs mt-0.5" />
+//             </div>
+//             <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20">
+//               {dropdownItems.staff.map((item) => (
+//                 <a
+//                   key={item}
+//                   href="#"
+//                   className="px-4 py-2 block text-sm text-gray-700 hover:bg-gray-100 transition"
+//                 >
+//                   {item}
+//                 </a>
+//               ))}
+//             </div>
+//           </div>
+
+//           {/* Office Dropdown */}
+//           <div className="relative group">
+//             <div className="flex items-center gap-1 cursor-pointer hover:text-blue-600">
+//               Our Office <FiChevronDown className="text-xs mt-0.5" />
+//             </div>
+//             <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20">
+//               {dropdownItems.office.map((item) => (
+//                 <a
+//                   key={item}
+//                   href="#"
+//                   className="px-4 py-2 block text-sm text-gray-700 hover:bg-gray-100 transition"
+//                 >
+//                   {item}
+//                 </a>
+//               ))}
+//             </div>
+//           </div>
+
+//           {/* Contact Link */}
+//           <a
+//             href="#contact"
+//             onClick={handleContactClick}
+//             className="hover:text-blue-600 transition cursor-pointer"
+//           >
+//             Contact
+//           </a>
+
+//           {/* More Dropdown */}
+//           <div className="relative group">
+//             <div className="flex items-center gap-1 cursor-pointer hover:text-blue-600">
+//               More <FiChevronDown className="text-xs mt-0.5" />
+//             </div>
+//             <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20">
+//               {dropdownItems.more.map((item) => (
+//                 <Link
+//                   key={item}
+//                   to={`/${item.toLowerCase()}`}
+//                   className="px-4 py-2 block text-sm text-gray-700 hover:bg-gray-100 transition"
+//                 >
+//                   {item}
+//                 </Link>
+//               ))}
+//             </div>
+//           </div>
+//         </nav>
+
+//         <Button onClick={openDentrixModal}>Request Appointment</Button>
+
+//         <button
+//           className="lg:hidden text-2xl text-gray-700"
+//           onClick={toggleMenu}
+//         >
+//           {menuOpen ? <FiX /> : <FiMenu />}
+//         </button>
+//       </div>
+
+//       {/* Mobile Menu */}
+//       {menuOpen && (
+//         <div className="lg:hidden bg-white/95 px-4 pb-4 shadow-inner">
+//           <nav className="flex flex-col gap-3 text-gray-700 text-sm font-medium">
+//             <Link to="/" className="hover:text-blue-600">
+//               Home
+//             </Link>
+
+//             {/* Contact */}
+//             <a
+//               href="#contact"
+//               onClick={handleContactClick}
+//               className="hover:text-blue-600 transition cursor-pointer"
+//             >
+//               Contact
+//             </a>
+
+//             {/* Dropdowns on mobile */}
+//             {["services", "staff", "office", "more"].map((section) => (
+//               <div className="border-b border-gray-200 py-2" key={section}>
+//                 <button
+//                   onClick={() => toggleDropdown(section)}
+//                   className="w-full flex justify-between items-center text-left hover:text-blue-600"
+//                 >
+//                   <span>
+//                     {section === "services"
+//                       ? "Services"
+//                       : section === "staff"
+//                       ? "Our Staff"
+//                       : section === "office"
+//                       ? "Our Office"
+//                       : "More"}
+//                   </span>
+//                   {mobileDropdowns[section] ? (
+//                     <FiChevronUp />
+//                   ) : (
+//                     <FiChevronDown />
+//                   )}
+//                 </button>
+//                 {mobileDropdowns[section] && (
+//                   <div className="mt-2 ml-2 space-y-2">
+//                     {dropdownItems[section].map((item) => (
+//                       <Link
+//                         key={item}
+//                         to={`/${item.toLowerCase()}`}
+//                         className="block pl-2 text-gray-600 hover:text-blue-600"
+//                       >
+//                         {item}
+//                       </Link>
+//                     ))}
+//                   </div>
+//                 )}
+//               </div>
+//             ))}
+
+//             <Button onClick={openDentrixModal}>Request Appointment</Button>
+//           </nav>
+//         </div>
+//       )}
+//     </header>
+//   );
+// };
+
+// export default Navbar;

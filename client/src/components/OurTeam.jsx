@@ -7,7 +7,7 @@ const OurTeam = () => {
       title: "RDH",
       img: "https://sa1s3optim.patientpop.com/assets/images/provider/photos/1675266.jpeg",
       bio: "I thoroughly enjoy working for Dr. Cetel and his office. Since 1994, I have been with Dr. Cetel’s practice. I have been practicing Dental Hygiene for patients since 1984. I graduated #1 in my hygiene program. I feel confident that our Dental facility provides top-notch care which I am happy to contribute to. I enjoy my profession as a Dental Hygienist and strive to do my utmost in following the 'Golden rule' in treating our dental patients.",
-      showAppointmentButton: true,
+      showAppointmentButton: false,
     },
     {
       name: "Dean Murrell",
@@ -21,7 +21,7 @@ const OurTeam = () => {
       title: "RDH",
       img: "https://sa1s3optim.patientpop.com/assets/images/provider/photos/1675270.jpeg",
       bio: "I am proud to say I have worked at Dr. Cetel's office as a hygienist over 20 years. Everyone here truly loves what they do which makes this a very special place. Our practice sets a high standard of care for our patients while creating a relaxing environment. I feel honored to work with such a dedicated group of professionals and hope to for many years to come. I have an associates degree from Camden County College and I hold a Bachelor's degree from Rowan University.",
-      showAppointmentButton: true,
+      showAppointmentButton: false,
     },
     {
       name: "Nicole Pelczar",
@@ -35,7 +35,7 @@ const OurTeam = () => {
       title: "RDH",
       img: "https://sa1s3optim.patientpop.com/assets/images/provider/photos/2261007.jpeg",
       bio: "I completed my Associates Degree in Dental Hygiene at the Community College of Philadelphia. Making my patients feel cared for and comfortable is my priority. I have a passion for people and absolutely love my job. I am proud to be a part of this incredible team at Dr. Cetel's office.",
-      showAppointmentButton: true,
+      showAppointmentButton: false,
     },
     {
       name: "Barbara",
