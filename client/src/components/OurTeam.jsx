@@ -56,11 +56,11 @@ const OurTeam = () => {
   return (
     <section className="pt-28 px-6 sm:px-12 py-16 bg-blue-50 min-h-screen">
       {/* Heading */}
-      <div className="mb-16">
-        <h2 className="text-md sm:text-4xl font-bold text-gray-400">
+      <div className="mb-6 md:mb-16">
+        <h2 className="text-md text-lg lg:text-4xl font-bold text-gray-400">
           Your smile deserves the best.
         </h2>
-        <p className="text-gray-600 font-bold mt-10 text-6xl">
+        <p className="text-gray-600 font-bold mt-4 lg:mt-10 text-2xl md:text-4xl lg:text-6xl">
           Meet the dental team <br /> that puts you first.
         </p>
       </div>
