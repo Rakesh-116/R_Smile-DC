@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { FaArrowUp } from "react-icons/fa6";
 
 const Footer = () => {
   const [showTopBtn, setShowTopBtn] = useState(false);
@@ -17,9 +18,10 @@ const Footer = () => {
         <div className="text-center mt-8">
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="text-sm text-white bg-blue-900 hover:bg-blue-800 px-4 py-2 lg:py-4 w-full transition"
+            className="text-sm text-white bg-blue-900 hover:bg-blue-800 px-4 py-2 lg:py-4 w-full transition flex items-center justify-center gap-2"
           >
-            ↑ Back to Top
+            <FaArrowUp />
+            Back to Top
           </button>
         </div>
       )}

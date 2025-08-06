@@ -94,10 +94,18 @@ const ContactSection = ({ openDentrixModal }) => {
               className="border rounded-md p-3 text-sm sm:col-span-2"
               required
             />
-            <p className="text-xs text-gray-500 sm:col-span-2">
-              By submitting this form, you agree to send your information by
-              email. Do not include sensitive health information.
-            </p>
+            <div className="flex items-start gap-2 sm:col-span-2 text-sm">
+              <input
+                type="checkbox"
+                required
+                className="mt-1 accent-blue-600"
+                id="consent"
+              />
+              <label htmlFor="consent" className="text-gray-600">
+                By submitting this form, you agree to send your information by
+                email. Do not include sensitive health information.
+              </label>
+            </div>
             <button
               type="submit"
               className="bg-blue-600 text-white px-6 py-3 rounded-md font-medium sm:col-span-2 hover:bg-blue-700 transition"
