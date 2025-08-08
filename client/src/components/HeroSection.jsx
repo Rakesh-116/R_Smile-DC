@@ -30,7 +30,7 @@ const HeroSection = ({ openDentrixModal }) => {
               Book Appointment
             </Button>
 
-            <Button onClick={() => (window.location.href = "tel:8562109508")}>
+            <Button onClick={() => (window.location.href = "tel:8564641900")}>
               (856) 464-1900
             </Button>
           </div>

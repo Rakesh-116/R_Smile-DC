@@ -52,8 +52,8 @@ const ContactSection = ({ openDentrixModal }) => {
           <div className="space-y-4 text-sm text-gray-700">
             <div className="flex items-center gap-2">
               <MdPhone className="text-blue-600" />
-              <a href="tel:8562109508" className="hover:underline">
-                (856) 210-9508
+              <a href="tel:8564641900" className="hover:underline">
+                (856) 464-1900
               </a>
             </div>
             <div className="flex items-center gap-2">
@@ -89,7 +89,7 @@ const ContactSection = ({ openDentrixModal }) => {
             <Button onClick={openDentrixModal}>Book Appointment</Button>
             <Button
               className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
-              onClick={() => (window.location.href = "tel:8562109508")}
+              onClick={() => (window.location.href = "tel:8564641900")}
             >
               Call Us
             </Button>
