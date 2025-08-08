@@ -1,4 +1,5 @@
 import React from "react";
+import GoogleReviewsSection from "../components/GoogleReviewsSection";
 import WhyChooseUsSection from "../components/WhyChooseUsSection";
 import OfficePreviewSection from "../components/OurOfficeSection";
 import InsurancePartners from "../components/InsurancePartners";
@@ -10,8 +11,9 @@ import ContactSection from "../components/ContactSection";
 
 const Hero = ({ openDentrixModal }) => {
   return (
-    <div className="sm:py-10 bg-white">
+    <div className="sm:py-10 bg-white px-2">
       <HeroSection openDentrixModal={openDentrixModal} />
+      <GoogleReviewsSection />
       <WhyChooseUsSection />
       <ServicesSection />
       <OfficePreviewSection />

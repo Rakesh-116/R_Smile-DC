@@ -16,6 +16,24 @@ const OfficePreviewSection = () => {
     "https://sa1s3optim.patientpop.com/assets/images/provider/photos/1837797.jpg",
   ];
 
+  const CustomPrevArrow = ({ onClick }) => (
+    <button
+      onClick={onClick}
+      className="absolute -left-4 lg:-left-10 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white rounded-full p-1 z-20 md:p-2 shadow-lg hover:bg-blue-700 text-xs md:text-base"
+    >
+      ◀
+    </button>
+  );
+
+  const CustomNextArrow = ({ onClick }) => (
+    <button
+      onClick={onClick}
+      className="absolute -right-4 lg:-right-10 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white rounded-full z-20 p-1 md:p-2 shadow-lg hover:bg-blue-700 text-xs md:text-base"
+    >
+      ▶
+    </button>
+  );
+
   const settings = {
     dots: true,
     infinite: true,
@@ -25,6 +43,8 @@ const OfficePreviewSection = () => {
     autoplay: true,
     autoplaySpeed: 3000,
     arrows: true,
+    prevArrow: <CustomPrevArrow />,
+    nextArrow: <CustomNextArrow />,
     responsive: [
       {
         breakpoint: 1024,
