@@ -1,13 +1,45 @@
-// components/ContactSection.jsx
-import React from "react";
+import React, { useState } from "react";
 import { MdAccessTime, MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
 import Button from "./Button";
+import toast, { Toaster } from "react-hot-toast";
 
 const ContactSection = ({ openDentrixModal }) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const formData = new FormData(e.target);
+
+    try {
+      const response = await fetch(
+        "https://formsubmit.co/ajax/rsddssewell@gmail.com",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (response.ok) {
+        toast.success("Your message has been sent!");
+        e.target.reset();
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      toast.error("Network error. Please try again.");
+    }
+
+    setLoading(false);
+  };
+
   return (
     <section id="contact" className="bg-white py-20 px-6 sm:px-12 pt-32">
+      <Toaster position="top-right" reverseOrder={false} />
+
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
-        {/* Left: Info + Hours */}
+        {/* Left Section */}
         <div>
           <h2 className="text-3xl font-bold text-blue-950 mb-6">
             Get in Touch
@@ -64,36 +96,49 @@ const ContactSection = ({ openDentrixModal }) => {
           </div>
         </div>
 
-        {/* Right: Contact Form */}
+        {/* Right Section - Contact Form */}
         <div>
           <h3 className="text-xl font-semibold text-blue-900 mb-4">
             Send Us a Message
           </h3>
-          <form className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+          >
+            {/* FormSubmit settings */}
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
+
             <input
+              name="name"
               type="text"
               placeholder="Name"
               className="border rounded-md p-3 text-sm"
               required
             />
             <input
+              name="email"
               type="email"
               placeholder="Email"
               className="border rounded-md p-3 text-sm"
               required
             />
             <input
+              name="phone"
               type="tel"
               placeholder="Phone Number"
               className="border rounded-md p-3 text-sm sm:col-span-2"
               required
             />
             <textarea
+              name="message"
               rows="5"
               placeholder="Your Message"
               className="border rounded-md p-3 text-sm sm:col-span-2"
               required
             />
+
             <div className="flex items-start gap-2 sm:col-span-2 text-sm">
               <input
                 type="checkbox"
@@ -106,11 +151,17 @@ const ContactSection = ({ openDentrixModal }) => {
                 email. Do not include sensitive health information.
               </label>
             </div>
+
             <button
               type="submit"
-              className="bg-blue-600 text-white px-6 py-3 rounded-md font-medium sm:col-span-2 hover:bg-blue-700 transition"
+              disabled={loading}
+              className={`px-6 py-3 rounded-md font-medium sm:col-span-2 transition ${
+                loading
+                  ? "bg-gray-400 text-white"
+                  : "bg-blue-600 text-white hover:bg-blue-700"
+              }`}
             >
-              Send Message
+              {loading ? "Sending..." : "Send Message"}
             </button>
           </form>
         </div>

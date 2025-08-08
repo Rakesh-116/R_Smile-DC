@@ -78,8 +78,7 @@ const Footer = () => {
             <p className="text-sm text-gray-300">
               100B Kings Way West, Suite 100B <br /> Sewell, NJ 08080
             </p>
-            <p className="text-sm mt-2 text-gray-300">Call: 856-210-9508</p>
-            <p className="text-sm text-gray-300">Fax: 856-537-3803</p>
+            <p className="text-sm mt-2 text-gray-300">Call: (856) 464-1900</p>
             <p className="text-sm text-gray-300">
               Email: info@rsmiledental.com
             </p>

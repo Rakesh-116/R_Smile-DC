@@ -49,9 +49,9 @@ const services = [
   },
 ];
 
-const ServicesSection = () => {
+const ServicesSection = ({ className }) => {
   return (
-    <section className="py-20 px-6 sm:px-10 bg-blue-50">
+    <section className={`py-20 px-6 sm:px-10 bg-blue-50 ${className}`}>
       <div className="max-w-7xl mx-auto">
         {/* Section Heading */}
         <SectionHeading
@@ -62,7 +62,13 @@ const ServicesSection = () => {
         {/* Services Grid */}
         <div className="lg:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Box 1: Intro */}
-          <div className="bg-white rounded-2xl p-6 shadow-md flex flex-col justify-center">
+          <div
+            className={`${
+              window.location.pathname === "/services"
+                ? "bg-blue-50"
+                : "bg-white"
+            } rounded-2xl p-6 shadow-md flex flex-col justify-center`}
+          >
             <h3 className="text-xl font-bold text-blue-900 mb-2">
               Personalized Treatments
             </h3>
@@ -73,7 +79,13 @@ const ServicesSection = () => {
           </div>
 
           {/* Box 2: Intro */}
-          <div className="bg-white rounded-2xl p-6 shadow-md flex flex-col justify-center">
+          <div
+            className={`${
+              window.location.pathname === "/services"
+                ? "bg-blue-50"
+                : "bg-white"
+            } rounded-2xl p-6 shadow-md flex flex-col justify-center`}
+          >
             <h3 className="text-xl font-bold text-blue-900 mb-2">
               Modern Methods
             </h3>

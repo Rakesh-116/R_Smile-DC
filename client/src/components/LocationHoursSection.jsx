@@ -24,11 +24,11 @@ const LocationHoursSection = ({ openDentrixModal }) => {
           <p className="text-gray-700 text-sm">Sewell, NJ 08080</p>
           <p className="text-gray-700 text-sm mt-4">
             <MdPhone className="inline-block mr-1" />
-            <strong>Phone:</strong> 856-210-9508
+            <strong>Phone:</strong> (856) 464-1900
           </p>
-          <p className="text-gray-700 text-sm">
+          {/* <p className="text-gray-700 text-sm">
             <strong>Fax:</strong> 856-537-3803
-          </p>
+          </p> */}
         </div>
 
         {/* ⏰ Office Hours */}
@@ -64,7 +64,7 @@ const LocationHoursSection = ({ openDentrixModal }) => {
               Book Appointment
             </Button>
             <Button onClick={() => (window.location.href = "tel:8562109508")}>
-              856-210-9508
+              (856) 464-1900
             </Button>
           </div>
         </div>

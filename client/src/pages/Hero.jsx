@@ -17,7 +17,6 @@ const Hero = ({ openDentrixModal }) => {
       <OfficePreviewSection />
       <InsurancePartners />
       <TestimonialsSection />
-      {/* <LocationHoursSection openDentrixModal={openDentrixModal} /> */}
       <ContactSection openDentrixModal={openDentrixModal} />
     </div>
   );
