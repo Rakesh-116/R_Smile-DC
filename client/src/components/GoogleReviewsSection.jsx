@@ -1,7 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
 import { FaStar } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 
 const reviews = [
   {
@@ -27,12 +26,13 @@ const reviews = [
 ];
 
 const GoogleReviewsSection = () => {
-  const navigate = useNavigate();
+  const GOOGLE_REVIEWS_URL =
+    "https://www.google.com/search?q=R-Smile+Dental+Care+reviews+usa&sca_esv=f5680b47e71e92a2&rlz=1C1RXQR_en-GBIN1070IN1070&sxsrf=AE3TifNYlBPm_ei6etel2L8UDw60KmfaQg%3A1754909737808&ei=KcyZaOOPMdW5seMP496QmQI&ved=0ahUKEwijyKOczIKPAxXVXGwGHWMvJCMQ4dUDCBA&uact=5&oq=R-Smile+Dental+Care+reviews+usa&gs_lp=Egxnd3Mtd2l6LXNlcnAiH1ItU21pbGUgRGVudGFsIENhcmUgcmV2aWV3cyB1c2EyCBAhGKABGMMESJMUUABYAHAAeACQAQCYAaMBoAGjAaoBAzAuMbgBA8gBAPgBAvgBAZgCAaACqQGYAwCSBwMwLjGgB9YBsgcDMC4xuAepAcIHAzAuMcgHAg&sclient=gws-wiz-serp";
 
   const CustomPrevArrow = ({ onClick }) => (
     <button
       onClick={onClick}
-      className="absolute left-0  top-1/2 transform -translate-y-1/2 bg-blue-600 text-white rounded-full p-1 z-20 md:p-2 shadow-lg hover:bg-blue-700 text-xs md:text-base"
+      className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white rounded-full p-1 z-20 md:p-2 shadow-lg hover:bg-blue-700 text-xs md:text-base"
     >
       ◀
     </button>
@@ -41,7 +41,7 @@ const GoogleReviewsSection = () => {
   const CustomNextArrow = ({ onClick }) => (
     <button
       onClick={onClick}
-      className="absolute right-0  top-1/2 transform -translate-y-1/2 bg-blue-600 text-white rounded-full z-20 p-1 md:p-2 shadow-lg hover:bg-blue-700 text-xs md:text-base"
+      className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white rounded-full z-20 p-1 md:p-2 shadow-lg hover:bg-blue-700 text-xs md:text-base"
     >
       ▶
     </button>
@@ -64,7 +64,7 @@ const GoogleReviewsSection = () => {
   };
 
   const handleReviewClick = () => {
-    navigate("/testimonials");
+    window.open(GOOGLE_REVIEWS_URL, "_blank", "noopener,noreferrer");
   };
 
   return (
