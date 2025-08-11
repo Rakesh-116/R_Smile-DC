@@ -101,9 +101,9 @@ const OfficePreviewSection = () => {
         </Slider>
 
         {/* CTA Button */}
-        <div className="mt-10 text-center">
+        {/* <div className="mt-10 text-center">
           <Button onClick={() => navigate("/our-office")}>See Full Tour</Button>
-        </div>
+        </div> */}
       </div>
     </section>
   );

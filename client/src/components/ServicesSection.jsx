@@ -51,7 +51,10 @@ const services = [
 
 const ServicesSection = ({ className }) => {
   return (
-    <section className={`py-20 px-6 sm:px-10 bg-blue-50 ${className}`}>
+    <section
+      id="services"
+      className={`py-20 px-6 sm:px-10 bg-blue-50 ${className}`}
+    >
       <div className="max-w-7xl mx-auto">
         {/* Section Heading */}
         <SectionHeading

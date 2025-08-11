@@ -8,27 +8,15 @@ const Navbar = ({ openDentrixModal }) => {
   const navigate = useNavigate();
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const [touchDropdown, setTouchDropdown] = useState(null); // for tablets
+  const [touchDropdown, setTouchDropdown] = useState(null);
 
   const dropdownItems = {
-    services: [
-      "Crowns",
-      "Root Canal",
-      "Dental Implants",
-      "Dentures",
-      "Invisalign",
-      "Teeth Whitening",
-      "Oral Surgery",
-      "Emergency Care",
-      "Teeth Cleaning",
-    ],
-    staff: ["Dr. Howard Cetel", "Dr. Rashmi Srivastava", "Our Team"],
+    staff: ["Dr.Rashmi Srivastava", "Our Team"],
     office: [
       "Forms and Patient Education",
       "Insurance and Billing",
       "Office Gallery",
     ],
-    more: ["Specials", "Blog", "Testimonials"],
   };
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -63,8 +51,13 @@ const Navbar = ({ openDentrixModal }) => {
             Home
           </Link>
 
-          {/* Loop only through services, staff, office */}
-          {["services", "staff", "office"].map((section) => (
+          {/* Services as direct link */}
+          <Link to="/services" className="hover:text-blue-600 transition">
+            Services
+          </Link>
+
+          {/* Staff Dropdown */}
+          {["staff"].map((section) => (
             <div
               key={section}
               className="relative group"
@@ -76,11 +69,7 @@ const Navbar = ({ openDentrixModal }) => {
               }}
             >
               <button className="flex items-center gap-1 hover:text-blue-600">
-                {section === "services"
-                  ? "Services"
-                  : section === "staff"
-                  ? "Our Staff"
-                  : "Our Office"}
+                {section === "staff" ? "Our Staff" : "Our Office"}
                 <FiChevronDown className="text-xs mt-0.5" />
               </button>
 
@@ -102,7 +91,7 @@ const Navbar = ({ openDentrixModal }) => {
             </div>
           ))}
 
-          {/* Contact Link */}
+          {/* Contact */}
           <a
             href="#contact"
             onClick={handleContactClick}
@@ -111,35 +100,10 @@ const Navbar = ({ openDentrixModal }) => {
             Contact
           </a>
 
-          {/* More Dropdown (Last) */}
-          <div
-            className="relative group"
-            onClick={(e) => {
-              if (window.matchMedia("(hover: none)").matches) {
-                e.preventDefault();
-                toggleTouchDropdown("more");
-              }
-            }}
-          >
-            <button className="flex items-center gap-1 hover:text-blue-600">
-              More <FiChevronDown className="text-xs mt-0.5" />
-            </button>
-            <div
-              className={`absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-md z-50 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 ${
-                touchDropdown === "more" ? "visible opacity-100" : ""
-              }`}
-            >
-              {dropdownItems.more.map((item) => (
-                <Link
-                  key={item}
-                  to={`/${item.toLowerCase()}`}
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
-                >
-                  {item}
-                </Link>
-              ))}
-            </div>
-          </div>
+          {/* Testimonials direct link */}
+          <Link to="/testimonials" className="hover:text-blue-600 transition">
+            Testimonials
+          </Link>
         </nav>
 
         <Button onClick={openDentrixModal}>Request Appointment</Button>
@@ -161,6 +125,10 @@ const Navbar = ({ openDentrixModal }) => {
               Home
             </Link>
 
+            <Link to="/services" className="hover:text-blue-600">
+              Services
+            </Link>
+
             <a
               href="#contact"
               onClick={handleContactClick}
@@ -169,7 +137,7 @@ const Navbar = ({ openDentrixModal }) => {
               Contact
             </a>
 
-            {/* Dropdowns */}
+            {/* Dropdowns for mobile */}
             {Object.keys(dropdownItems).map((section) => (
               <div key={section} className="border-b border-gray-200 py-2">
                 <button
@@ -177,8 +145,8 @@ const Navbar = ({ openDentrixModal }) => {
                   className="w-full flex justify-between items-center text-left hover:text-blue-600"
                 >
                   <span className="capitalize">
-                    {section === "more"
-                      ? "More"
+                    {section === "staff"
+                      ? "Our Staff"
                       : section.replace(/([A-Z])/g, " $1")}
                   </span>
                   {touchDropdown === section ? (
@@ -203,6 +171,10 @@ const Navbar = ({ openDentrixModal }) => {
               </div>
             ))}
 
+            <Link to="/testimonials" className="hover:text-blue-600">
+              Testimonials
+            </Link>
+
             <Button onClick={openDentrixModal}>Request Appointment</Button>
           </nav>
         </div>
@@ -223,20 +195,7 @@ export default Navbar;
 //   const navigate = useNavigate();
 
 //   const [menuOpen, setMenuOpen] = useState(false);
-//   const [mobileDropdowns, setMobileDropdowns] = useState({
-//     services: false,
-//     staff: false,
-//     office: false,
-//     more: false,
-//   });
-
-//   const toggleMenu = () => setMenuOpen(!menuOpen);
-
-//   const toggleDropdown = (key) =>
-//     setMobileDropdowns((prev) => ({
-//       ...prev,
-//       [key]: !prev[key],
-//     }));
+//   const [touchDropdown, setTouchDropdown] = useState(null); // for tablets
 
 //   const dropdownItems = {
 //     services: [
@@ -250,13 +209,18 @@ export default Navbar;
 //       "Emergency Care",
 //       "Teeth Cleaning",
 //     ],
-//     staff: ["Dr. Howard Cetel", "Dr. Rashmi Srivastava", "Staff Members"],
+//     staff: ["Dr. Rashmi Srivastava", "Our Team"],
 //     office: [
 //       "Forms and Patient Education",
 //       "Insurance and Billing",
 //       "Office Gallery",
 //     ],
 //     more: ["Specials", "Blog", "Testimonials"],
+//   };
+
+//   const toggleMenu = () => setMenuOpen(!menuOpen);
+//   const toggleTouchDropdown = (section) => {
+//     setTouchDropdown(touchDropdown === section ? null : section);
 //   };
 
 //   const handleContactClick = (e) => {
@@ -276,69 +240,54 @@ export default Navbar;
 //   return (
 //     <header className="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md shadow-md z-50 mb-10">
 //       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4">
-//         <Link className="text-2xl font-bold text-blue-700" to="/">
-//           <img src="./logo.png" alt="R-Smile Dental Care" className="h-12" />
+//         <Link to="/" className="text-2xl font-bold text-blue-700">
+//           <img src="./logo.png" alt="R-Smile Logo" className="h-12" />
 //         </Link>
 
 //         {/* Desktop Nav */}
-//         <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-700 relative">
+//         <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-700">
 //           <Link to="/" className="hover:text-blue-600 transition">
 //             Home
 //           </Link>
 
-//           {/* Services Dropdown */}
-//           <div className="relative group">
-//             <div className="flex items-center gap-1 cursor-pointer hover:text-blue-600">
-//               Services <FiChevronDown className="text-xs mt-0.5" />
-//             </div>
-//             <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20">
-//               {dropdownItems.services.map((item) => (
-//                 <a
-//                   key={item}
-//                   href="#"
-//                   className="px-4 py-2 block text-sm text-gray-700 hover:bg-gray-100 transition"
-//                 >
-//                   {item}
-//                 </a>
-//               ))}
-//             </div>
-//           </div>
+//           {/* Loop only through services, staff, office */}
+//           {["staff"].map((section) => (
+//             <div
+//               key={section}
+//               className="relative group"
+//               onClick={(e) => {
+//                 if (window.matchMedia("(hover: none)").matches) {
+//                   e.preventDefault();
+//                   toggleTouchDropdown(section);
+//                 }
+//               }}
+//             >
+//               <button className="flex items-center gap-1 hover:text-blue-600">
+//                 {section === "services"
+//                   ? "Services"
+//                   : section === "staff"
+//                   ? "Our Staff"
+//                   : "Our Office"}
+//                 <FiChevronDown className="text-xs mt-0.5" />
+//               </button>
 
-//           {/* Staff Dropdown */}
-//           <div className="relative group">
-//             <div className="flex items-center gap-1 cursor-pointer hover:text-blue-600">
-//               Our Staff <FiChevronDown className="text-xs mt-0.5" />
+//               <div
+//                 className={`absolute top-full left-0 mt-2 w-64 bg-white shadow-lg rounded-md z-50 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 ${
+//                   touchDropdown === section ? "visible opacity-100" : ""
+//                 }`}
+//               >
+//                 {dropdownItems[section].map((item) => (
+//                   <Link
+//                     key={item}
+//                     to={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
+//                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+//                   >
+//                     {item}
+//                   </Link>
+//                 ))}
+//               </div>
 //             </div>
-//             <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20">
-//               {dropdownItems.staff.map((item) => (
-//                 <a
-//                   key={item}
-//                   href="#"
-//                   className="px-4 py-2 block text-sm text-gray-700 hover:bg-gray-100 transition"
-//                 >
-//                   {item}
-//                 </a>
-//               ))}
-//             </div>
-//           </div>
-
-//           {/* Office Dropdown */}
-//           <div className="relative group">
-//             <div className="flex items-center gap-1 cursor-pointer hover:text-blue-600">
-//               Our Office <FiChevronDown className="text-xs mt-0.5" />
-//             </div>
-//             <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20">
-//               {dropdownItems.office.map((item) => (
-//                 <a
-//                   key={item}
-//                   href="#"
-//                   className="px-4 py-2 block text-sm text-gray-700 hover:bg-gray-100 transition"
-//                 >
-//                   {item}
-//                 </a>
-//               ))}
-//             </div>
-//           </div>
+//           ))}
 
 //           {/* Contact Link */}
 //           <a
@@ -349,17 +298,29 @@ export default Navbar;
 //             Contact
 //           </a>
 
-//           {/* More Dropdown */}
-//           <div className="relative group">
-//             <div className="flex items-center gap-1 cursor-pointer hover:text-blue-600">
+//           {/* More Dropdown (Last) */}
+//           <div
+//             className="relative group"
+//             onClick={(e) => {
+//               if (window.matchMedia("(hover: none)").matches) {
+//                 e.preventDefault();
+//                 toggleTouchDropdown("more");
+//               }
+//             }}
+//           >
+//             <button className="flex items-center gap-1 hover:text-blue-600">
 //               More <FiChevronDown className="text-xs mt-0.5" />
-//             </div>
-//             <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20">
+//             </button>
+//             <div
+//               className={`absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-md z-50 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 ${
+//                 touchDropdown === "more" ? "visible opacity-100" : ""
+//               }`}
+//             >
 //               {dropdownItems.more.map((item) => (
 //                 <Link
 //                   key={item}
 //                   to={`/${item.toLowerCase()}`}
-//                   className="px-4 py-2 block text-sm text-gray-700 hover:bg-gray-100 transition"
+//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
 //                 >
 //                   {item}
 //                 </Link>
@@ -370,6 +331,7 @@ export default Navbar;
 
 //         <Button onClick={openDentrixModal}>Request Appointment</Button>
 
+//         {/* Hamburger */}
 //         <button
 //           className="lg:hidden text-2xl text-gray-700"
 //           onClick={toggleMenu}
@@ -378,7 +340,7 @@ export default Navbar;
 //         </button>
 //       </div>
 
-//       {/* Mobile Menu */}
+//       {/* Mobile Nav */}
 //       {menuOpen && (
 //         <div className="lg:hidden bg-white/95 px-4 pb-4 shadow-inner">
 //           <nav className="flex flex-col gap-3 text-gray-700 text-sm font-medium">
@@ -386,7 +348,6 @@ export default Navbar;
 //               Home
 //             </Link>
 
-//             {/* Contact */}
 //             <a
 //               href="#contact"
 //               onClick={handleContactClick}
@@ -395,34 +356,30 @@ export default Navbar;
 //               Contact
 //             </a>
 
-//             {/* Dropdowns on mobile */}
-//             {["services", "staff", "office", "more"].map((section) => (
-//               <div className="border-b border-gray-200 py-2" key={section}>
+//             {/* Dropdowns */}
+//             {Object.keys(dropdownItems).map((section) => (
+//               <div key={section} className="border-b border-gray-200 py-2">
 //                 <button
-//                   onClick={() => toggleDropdown(section)}
+//                   onClick={() => toggleTouchDropdown(section)}
 //                   className="w-full flex justify-between items-center text-left hover:text-blue-600"
 //                 >
-//                   <span>
-//                     {section === "services"
-//                       ? "Services"
-//                       : section === "staff"
-//                       ? "Our Staff"
-//                       : section === "office"
-//                       ? "Our Office"
-//                       : "More"}
+//                   <span className="capitalize">
+//                     {section === "more"
+//                       ? "More"
+//                       : section.replace(/([A-Z])/g, " $1")}
 //                   </span>
-//                   {mobileDropdowns[section] ? (
+//                   {touchDropdown === section ? (
 //                     <FiChevronUp />
 //                   ) : (
 //                     <FiChevronDown />
 //                   )}
 //                 </button>
-//                 {mobileDropdowns[section] && (
+//                 {touchDropdown === section && (
 //                   <div className="mt-2 ml-2 space-y-2">
 //                     {dropdownItems[section].map((item) => (
 //                       <Link
 //                         key={item}
-//                         to={`/${item.toLowerCase()}`}
+//                         to={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
 //                         className="block pl-2 text-gray-600 hover:text-blue-600"
 //                       >
 //                         {item}

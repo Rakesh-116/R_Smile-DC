@@ -2,11 +2,12 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Hero from "./pages/Hero";
-import About from "./pages/About";
+import AboutDrRashmiSrivastava from "./pages/AboutDrRashmiSriVastsava";
 import Services from "./pages/Services";
-import OurTeam from "./components/OurTeam";
+import OurTeam from "./pages/OurTeam";
 import OurOffice from "./pages/OurOffice";
 import Contact from "./pages/Contact";
+import Testimonials from "./pages/Testimonials";
 
 const App = () => {
   return (
@@ -38,10 +39,10 @@ const App = () => {
           }
         />
         <Route
-          path="/about"
+          path="/dr.rashmi-srivastava"
           element={
             <Layout>
-              <About />
+              <AboutDrRashmiSrivastava />
             </Layout>
           }
         />
@@ -67,6 +68,14 @@ const App = () => {
           element={
             <Layout>
               <Contact />
+            </Layout>
+          }
+        />
+        <Route
+          path="/testimonials"
+          element={
+            <Layout>
+              <Testimonials />
             </Layout>
           }
         />

@@ -59,10 +59,10 @@ const ContactSection = ({ openDentrixModal }) => {
             <div className="flex items-center gap-2">
               <MdEmail className="text-blue-600" />
               <a
-                href="mailto:info@rsmiledental.com"
+                href="mailto:rsddssewell@gmail.com"
                 className="hover:underline"
               >
-                info@rsmiledental.com
+                rsddssewell@gmail.com
               </a>
             </div>
             <div className="flex items-center gap-2">
