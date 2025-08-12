@@ -12,11 +12,11 @@ const Navbar = ({ openDentrixModal }) => {
 
   const dropdownItems = {
     staff: ["Dr.Rashmi Srivastava", "Our Team"],
-    office: [
-      "Forms and Patient Education",
-      "Insurance and Billing",
-      "Office Gallery",
-    ],
+    // office: [
+    //   "Forms and Patient Education",
+    //   "Insurance and Billing",
+    //   "Office Gallery",
+    // ],
   };
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -121,11 +121,25 @@ const Navbar = ({ openDentrixModal }) => {
       {menuOpen && (
         <div className="lg:hidden bg-white/95 px-4 pb-4 shadow-inner">
           <nav className="flex flex-col gap-3 text-gray-700 text-sm font-medium">
-            <Link to="/" className="hover:text-blue-600">
+            <Link
+              to="/"
+              className="hover:text-blue-600"
+              onClick={() => {
+                setMenuOpen(false);
+                setTouchDropdown(null);
+              }}
+            >
               Home
             </Link>
 
-            <Link to="/services" className="hover:text-blue-600">
+            <Link
+              to="/services"
+              className="hover:text-blue-600"
+              onClick={() => {
+                setMenuOpen(false);
+                setTouchDropdown(null);
+              }}
+            >
               Services
             </Link>
 
@@ -162,6 +176,10 @@ const Navbar = ({ openDentrixModal }) => {
                         key={item}
                         to={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
                         className="block pl-2 text-gray-600 hover:text-blue-600"
+                        onClick={() => {
+                          setMenuOpen(false); // Close mobile menu
+                          setTouchDropdown(null); // Close dropdown
+                        }}
                       >
                         {item}
                       </Link>
@@ -171,11 +189,26 @@ const Navbar = ({ openDentrixModal }) => {
               </div>
             ))}
 
-            <Link to="/testimonials" className="hover:text-blue-600">
+            <Link
+              to="/testimonials"
+              className="hover:text-blue-600"
+              onClick={() => {
+                setMenuOpen(false);
+                setTouchDropdown(null);
+              }}
+            >
               Testimonials
             </Link>
 
-            <Button onClick={openDentrixModal}>Request Appointment</Button>
+            <Button
+              onClick={() => {
+                openDentrixModal();
+                setMenuOpen(false);
+                setTouchDropdown(null);
+              }}
+            >
+              Request Appointment
+            </Button>
           </nav>
         </div>
       )}

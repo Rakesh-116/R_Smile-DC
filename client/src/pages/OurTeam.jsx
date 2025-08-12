@@ -1,4 +1,6 @@
 import React from "react";
+import ServicesSection from "../components/ServicesSection";
+import ContactSection from "../components/ContactSection";
 
 const OurTeam = () => {
   const doctors = [
@@ -54,51 +56,57 @@ const OurTeam = () => {
   ];
 
   return (
-    <section className="pt-28 px-6 sm:px-12 py-16 bg-blue-50 min-h-screen">
-      {/* Heading */}
-      <div className="mb-6 md:mb-16">
-        <h2 className="text-md text-lg lg:text-4xl font-bold text-gray-400">
-          Your smile deserves the best.
-        </h2>
-        <p className="text-gray-600 font-bold mt-4 lg:mt-10 text-2xl md:text-4xl lg:text-6xl">
-          Meet the dental team <br /> that puts you first.
-        </p>
-      </div>
+    <div>
+      <section className="pt-28 px-6 sm:px-12 py-16 bg-blue-50 min-h-screen">
+        {/* Heading */}
+        <div className="mb-6 md:mb-16">
+          <h2 className="text-md text-lg lg:text-4xl font-bold text-gray-400">
+            Your smile deserves the best.
+          </h2>
+          <p className="text-gray-600 font-bold mt-4 lg:mt-10 text-2xl md:text-4xl lg:text-6xl">
+            Meet the dental team <br /> that puts you first.
+          </p>
+        </div>
 
-      {/* Doctor Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
-        {doctors.map((doc, idx) => (
-          <div
-            key={idx}
-            className="bg-white rounded-2xl shadow-md p-4 flex flex-col justify-between items-center text-center max-w-sm w-full mx-auto"
-          >
-            <div>
-              <img
-                src={
-                  doc.img ||
-                  "https://thumbs.dreamstime.com/b/doctor-icon-man-avatar-medical-mask-coat-isolated-white-background-245788736.jpg"
-                }
-                alt={doc.name}
-                className="w-full h-64 object-top rounded-xl shadow-sm"
-              />
-              <div className="mt-4 space-y-1">
-                <h3 className="text-xl font-bold text-blue-900">{doc.name}</h3>
-                <p className="text-gray-500 text-sm">{doc.title}</p>
-                <p className="text-gray-700 text-sm mt-2">{doc.bio}</p>
+        {/* Doctor Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+          {doctors.map((doc, idx) => (
+            <div
+              key={idx}
+              className="bg-white rounded-2xl shadow-md p-4 flex flex-col justify-between items-center text-center max-w-sm w-full mx-auto"
+            >
+              <div>
+                <img
+                  src={
+                    doc.img ||
+                    "https://thumbs.dreamstime.com/b/doctor-icon-man-avatar-medical-mask-coat-isolated-white-background-245788736.jpg"
+                  }
+                  alt={doc.name}
+                  className="w-full h-64 object-top rounded-xl shadow-sm"
+                />
+                <div className="mt-4 space-y-1">
+                  <h3 className="text-xl font-bold text-blue-900">
+                    {doc.name}
+                  </h3>
+                  <p className="text-gray-500 text-sm">{doc.title}</p>
+                  <p className="text-gray-700 text-sm mt-2">{doc.bio}</p>
+                </div>
               </div>
+              {doc.showAppointmentButton && (
+                <button
+                  href="#"
+                  className="border-2 border-blue-950 rounded-full px-4 py-2 mt-4 hover:bg-blue-950 cursor-pointer hover:text-white hover:font-medium transition duration-300"
+                >
+                  Request Appointment
+                </button>
+              )}
             </div>
-            {doc.showAppointmentButton && (
-              <button
-                href="#"
-                className="border-2 border-blue-950 rounded-full px-4 py-2 mt-4 hover:bg-blue-950 cursor-pointer hover:text-white hover:font-medium transition duration-300"
-              >
-                Request Appointment
-              </button>
-            )}
-          </div>
-        ))}
-      </div>
-    </section>
+          ))}
+        </div>
+      </section>
+      <ServicesSection />
+      <ContactSection />
+    </div>
   );
 };
 

@@ -8,10 +8,12 @@ import OurTeam from "./pages/OurTeam";
 import OurOffice from "./pages/OurOffice";
 import Contact from "./pages/Contact";
 import Testimonials from "./pages/Testimonials";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route
           path="/"

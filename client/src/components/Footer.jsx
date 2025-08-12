@@ -12,19 +12,18 @@ const Footer = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   return (
     <div>
-      {showTopBtn && (
-        <div className="text-center mt-8">
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="text-sm text-white bg-blue-900 hover:bg-blue-800 px-4 py-2 lg:py-4 w-full transition flex items-center justify-center gap-2"
-          >
-            <FaArrowUp />
-            Back to Top
-          </button>
-        </div>
-      )}
+      <div className="text-center">
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="text-sm text-white bg-blue-900 hover:bg-blue-800 px-4 py-2 lg:py-4 w-full transition flex items-center justify-center gap-2"
+        >
+          <FaArrowUp />
+          Back to Top
+        </button>
+      </div>
       <footer className="bg-blue-950 py-16 px-6 sm:px-12 text-white">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* About + Logo */}

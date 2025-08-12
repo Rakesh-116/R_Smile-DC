@@ -1,6 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
 import { FaStar } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const reviews = [
   {
@@ -26,8 +27,10 @@ const reviews = [
 ];
 
 const GoogleReviewsSection = () => {
+  const navigate = useNavigate();
+
   const GOOGLE_REVIEWS_URL =
-    "https://www.google.com/search?q=R-Smile+Dental+Care+reviews+usa&sca_esv=f5680b47e71e92a2&rlz=1C1RXQR_en-GBIN1070IN1070&sxsrf=AE3TifNYlBPm_ei6etel2L8UDw60KmfaQg%3A1754909737808&ei=KcyZaOOPMdW5seMP496QmQI&ved=0ahUKEwijyKOczIKPAxXVXGwGHWMvJCMQ4dUDCBA&uact=5&oq=R-Smile+Dental+Care+reviews+usa&gs_lp=Egxnd3Mtd2l6LXNlcnAiH1ItU21pbGUgRGVudGFsIENhcmUgcmV2aWV3cyB1c2EyCBAhGKABGMMESJMUUABYAHAAeACQAQCYAaMBoAGjAaoBAzAuMbgBA8gBAPgBAvgBAZgCAaACqQGYAwCSBwMwLjGgB9YBsgcDMC4xuAepAcIHAzAuMcgHAg&sclient=gws-wiz-serp";
+    "https://www.google.com/search?q=R-Smile+Dental+Care+reviews+usa&sca_esv=f5680b47e71e92a2&rlz=1C1RXQR_en-GBIN1070IN1070&sxsrf=AE3TifNYlBPm_ei6etel2L8UDw60KmfaQg%3A1754909737808&ei=KcyZaOOPMdW5seMP496QmQI&ved=0ahUKEwijyKOczIKPAxXVXGwGHWMvJCMQ4dUDCBA&uact=5";
 
   const CustomPrevArrow = ({ onClick }) => (
     <button
@@ -63,32 +66,42 @@ const GoogleReviewsSection = () => {
     ],
   };
 
-  const handleReviewClick = () => {
-    window.open(GOOGLE_REVIEWS_URL, "_blank", "noopener,noreferrer");
+  // Clicking a card → Go to Testimonials page
+  const handleCardClick = () => {
+    navigate("/testimonials");
   };
 
   return (
-    <section className="bg-gray-50 pt-10 pb-20 px-2 cursor-pointer">
+    <section className="bg-gray-50 pt-10 pb-20 px-2">
       <div className="max-w-6xl mx-auto">
+        {/* Top section with heading & "Trusted by" */}
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-6 px-4">
+          <h2 className="text-xl font-bold text-gray-800">
+            Kind words from our patients
+          </h2>
+          <p
+            className="text-black underline cursor-pointer font-semibold"
+            onClick={() => window.open(GOOGLE_REVIEWS_URL, "_blank")}
+          >
+            Trusted by 1,000+ happy patients →
+          </p>
+        </div>
+
+        {/* Slider with review cards */}
         <Slider {...settings}>
           {reviews.map((review, idx) => (
             <div
               key={idx}
-              onClick={handleReviewClick}
-              className="px-2 transition-transform duration-200 hover:scale-105"
+              onClick={handleCardClick}
+              className="px-2 transition-transform duration-200 hover:scale-105 cursor-pointer"
             >
               <div className="bg-white shadow rounded-lg p-4 md:p-8 mx-4 md:mx-0 flex flex-col justify-between h-full">
-                {/* Stars */}
                 <div className="flex text-yellow-400 mb-2">
                   {[...Array(review.rating)].map((_, i) => (
                     <FaStar key={i} size={14} />
                   ))}
                 </div>
-
-                {/* One line review */}
                 <p className="text-gray-700 text-sm">"{review.text}"</p>
-
-                {/* Name */}
                 <span className="mt-2 text-xs text-gray-500">
                   – {review.name}
                 </span>
