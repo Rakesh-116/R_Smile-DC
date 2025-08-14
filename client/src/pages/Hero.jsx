@@ -8,17 +8,17 @@ import ContactSection from "../components/ContactSection";
 import OurTeamSection from "../components/OurTeamSection";
 
 const Hero = ({ openDentrixModal }) => {
-  return (
-    <div className="sm:py-10 bg-white px-2">
-      <HeroSection openDentrixModal={openDentrixModal} />
-      <GoogleReviewsSection />
-      <OfficePreviewSection />
-      <ServicesSection />
-      <OurTeamSection />
-      <InsurancePartners />
-      <ContactSection openDentrixModal={openDentrixModal} />
-    </div>
-  );
+    return (
+        <div className="sm:py-10 bg-white px-2">
+            <HeroSection openDentrixModal={openDentrixModal} />
+            <GoogleReviewsSection />
+            <OfficePreviewSection />
+            <ServicesSection />
+            <OurTeamSection />
+            <InsurancePartners />
+            <ContactSection openDentrixModal={openDentrixModal} />
+        </div>
+    );
 };
 
 export default Hero;
